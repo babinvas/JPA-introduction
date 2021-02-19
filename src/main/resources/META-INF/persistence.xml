@@ -1,0 +1,7 @@
+<persistence>
+    <persistence-unit name="BabinVas">
+        <description>Persistence Unit For tes</description>
+        <class>hibernate.model.Category</class>
+        <class>hibernate.model.Topic</class>
+    </persistence-unit>
+</persistence>
