@@ -1,4 +1,7 @@
-package babinvas.jpaintroduction;
+package babinvas.jpaintroduction.model;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 public class Category {
 	private Long id;

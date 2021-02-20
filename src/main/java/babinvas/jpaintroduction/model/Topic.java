@@ -1,4 +1,4 @@
-package babinvas.jpaintroduction;
+package babinvas.jpaintroduction.model;
 
 public class Topic {
 	private Long id;
