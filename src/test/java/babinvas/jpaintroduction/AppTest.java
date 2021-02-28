@@ -5,32 +5,38 @@ import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AppTest {
 	EntityManager entityManager;
+	EntityTransaction entityTransaction;
 
-	@BeforeAll
+	@BeforeEach
 	public void init() {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JavaRush");
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Babinvas");
 		entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
+
+		entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
 	}
 
 	@Test
 	public void shouldPersistCategory() {
 		Category cat = new Category();
 		cat.setTitle("new category");
+
 		entityManager.persist(cat);
+
 		Category result = entityManager.find(Category.class, 1L);
+
 		Assertions.assertNotNull(result);
 	}
 
-	@AfterAll
+	@AfterEach
 	public void close() {
-		if(entityManager.getTransaction().isActive()) {
-			entityManager.getTransaction().commit();
+		if(entityTransaction.isActive()) {
+			entityTransaction.commit();
 		}
 
 		entityManager.getEntityManagerFactory().close();
